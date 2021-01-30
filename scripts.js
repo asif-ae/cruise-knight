@@ -42,6 +42,14 @@ function subtotalCalculator() {
   const getSubtotalPrice = document.getElementById('subtotal-price');
   const calculateSubtotalPrice = firstClassSeatTotalPrice + economySeatTotalPrice;
   getSubtotalPrice.innerText = '$' + calculateSubtotalPrice;
+
+  // Calculate Tax Price
+  const getVatValue = Math.round(calculateSubtotalPrice * 0.1);
+  document.getElementById('vat-value').innerText = getVatValue;
+
+  // Calculate Grandtotal Price
+  const getGrandtotalPrice = calculateSubtotalPrice + getVatValue;
+  document.getElementById('grandtotal-value').innerText = getGrandtotalPrice;
 }
 
 

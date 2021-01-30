@@ -96,6 +96,7 @@ function getEconomySeatPriceFunction(getEconomyUnitPrice) {
   return economySeatPrice;
 }
 
+// For Bonus
 const submitBtn = document.getElementById('submit-button');
 submitBtn.addEventListener('click', function confirmOutputFunction() {
   // First Class Ticket Quantity Update

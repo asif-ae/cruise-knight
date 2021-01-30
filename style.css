@@ -33,10 +33,13 @@ nav ul li a{
     padding: 10px;
     text-transform: uppercase;
     margin-left: 30px;
+    text-decoration: none;
 }
 nav ul li a:hover, a.active{
     background-color: #E33741;
     border-radius: 5px;
+    text-decoration: none;
+    color: white;
 }
 .main-content{
     display: grid;
@@ -99,10 +102,38 @@ nav ul li a:hover, a.active{
 .plus-minus-btn{
     color: #3352F2;
     font-size: 30px;
-    padding: 2px;
-    margin: 10px 5px 0px 0px;
+    padding: 0;
+    margin: 0;
     word-spacing: 20px;
 }
+
+.custom-p {
+    margin: 0 10px 0 -20px;
+}
+
+.custom-button {
+    color: #3352F2;
+    font-size: 30px;
+    padding: 2px;
+    background-color: white;
+    border: none;
+    height: 64px;
+    padding: 0 5px;
+}
+
+.custom-button:focus {
+    border: none;
+    outline: none;
+}
+
+.disabled {
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    opacity: .25;
+}
+
 .booking-form .inputs{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -118,6 +149,20 @@ nav ul li a:hover, a.active{
     font-weight: 500;
     background-color:  #E33741;
 }
+
+.btn-style:hover,
+.btn-style:active,
+.btn-style:focus{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    background-color:  tomato;
+}
+
 .amount{
     display: flex;
     justify-content: space-between;

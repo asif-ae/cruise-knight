@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -30,16 +31,14 @@
     <main class="main-content container">
 
         <div class="booking-content">
-            <h1>Cruise Knight</h1>
+            <h1>Cruise Queen</h1>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
         </div>
-
-
         <div class="booking-form">
             <h3>Book Ocean Time</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh">
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
             </div>
             <div class="input-group">
                 <label for="">Flying To</label>
@@ -56,22 +55,21 @@
                 </div>
             </div>
             <div class="input-group f-class">
+                <label for="">First Class ($<span id="first-class-unit-price">150</span>)</label>
                 <div>
-                    <label for="">First Class ($<span id="first-class-unit-price">150</span>)</label>
                     <input id="first-class-seat-count" class="inp-style inp-width" type="number" name="" value="1">
                 </div>
-                <div class="plus-minus-btn">
-                    <p><span id="first-class-seat-increase">+</span> <span id="first-class-seat-decrease">-</span></p>
+                <div>
+                    <p class="plus-minus-btn custom-p"><button id="first-class-seat-increase" class="custom-button">+</button> <button id="first-class-seat-decrease" class="custom-button">-</button></p>
                 </div>
             </div>
-            
             <div class="input-group f-class">
+                <label for="">Economy ($<span id="economy-unit-price">100</span>)</label>
                 <div>
-                    <label for="">Economy ($<span id="economy-unit-price">100</span>)</label>
                     <input id="economy-seat-count" class="inp-style inp-width" type="number" name="" value="1">
                 </div>
-                <div class="plus-minus-btn">
-                    <p><span id="economy-seat-increase">+</span> <span id="economy-seat-decrease">-</span></p>
+                <div>
+                    <p class="plus-minus-btn custom-p"><button id="economy-seat-increase" class="custom-button">+</button> <button id="economy-seat-decrease" class="custom-button">-</button></p>
                 </div>
             </div>
             <div class="calculations">
@@ -83,7 +81,6 @@
                         <p id="subtotal-price">$250</p>
                     </div>
                 </div>
-
                 <div class="amount">
                     <div class="left">
                         <p>Charge 10% VAT</p>
@@ -102,9 +99,35 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <!-- Button trigger modal -->
+            <button type="button" id="submit-button" class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#exampleModal">Book Now</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Order Completed</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick="window.location.reload();"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>You have purchased <b><span id="first-class-ticket-quantity"></span></b> First Class Ticket(s)!</p>
+                                <p>You have purchased <b><span id="economy-ticket-quantity"></span></b> Economy Ticket(s)!</p>
+                                <p>Your subtotal price is <strong>$<span id="subtotal-price-is"></span></strong>!</p>
+                                <p>Your total VAT is <strong>$<span id="total-vat-is"></span></strong>!</p>
+                                <p>Your Grandtotal is <strong>$<span id="grandtotal-is"></span></strong>!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick="window.location.reload();">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="scripts.js"></script>
     <!--Thank You-->
 </body>

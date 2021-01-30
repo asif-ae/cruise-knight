@@ -7,7 +7,10 @@ function controlIncrement(increaseButtonId, increaseInputId) {
     seatCount.value = seatNewCount;
 
     // You will find the calculation below the decrease value count section
-    subtotalCalculator();
+    subtotalPriceCalculator();
+    taxPriceCalculator();
+    grandtotalCalculator();
+    bookNowButtonControl();
   });
 }
 controlIncrement('first-class-seat-increase', 'first-class-seat-count');
@@ -24,14 +27,17 @@ function controlDecrement(decreaseButtonId, decreaseInputId) {
     }
 
     // You will find the calculation below the decrease value count section
-    subtotalCalculator();
+    subtotalPriceCalculator();
+    taxPriceCalculator();
+    grandtotalCalculator();
+    bookNowButtonControl();
   });
 }
 controlDecrement('first-class-seat-decrease', 'first-class-seat-count');
 controlDecrement('economy-seat-decrease', 'economy-seat-count');
 
-// The Subtotal Value Calculator or the function subtotalCalculator()
-function subtotalCalculator() {
+// Subtotal Price Calculator
+function subtotalPriceCalculator() {
   // Update First Class Price
   const firstClassSeatTotalPrice = getFirstClassSeatPriceFunction('first-class-unit-price');
 
@@ -42,16 +48,33 @@ function subtotalCalculator() {
   const getSubtotalPrice = document.getElementById('subtotal-price');
   const calculateSubtotalPrice = firstClassSeatTotalPrice + economySeatTotalPrice;
   getSubtotalPrice.innerText = '$' + calculateSubtotalPrice;
-
-  // Calculate Tax Price
-  const getVatValue = Math.round(calculateSubtotalPrice * 0.1);
-  document.getElementById('vat-value').innerText = getVatValue;
-
-  // Calculate Grandtotal Price
-  const getGrandtotalPrice = calculateSubtotalPrice + getVatValue;
-  document.getElementById('grandtotal-value').innerText = getGrandtotalPrice;
+  return calculateSubtotalPrice;
 }
 
+// Tax/VAT Calculator
+function taxPriceCalculator() {
+  // Calculate Tax Price
+  const getVatValue = Math.round(subtotalPriceCalculator() * 0.1);
+  document.getElementById('vat-value').innerText = getVatValue;
+  return getVatValue;
+}
+
+// Grandtotal Calculator
+function grandtotalCalculator() {
+  // Calculate Grandtotal Price
+  const getGrandtotalPrice = subtotalPriceCalculator() + taxPriceCalculator();
+  document.getElementById('grandtotal-value').innerText = getGrandtotalPrice;
+  return getGrandtotalPrice;
+}
+
+function bookNowButtonControl() {
+  const grandtotal = grandtotalCalculator();
+  if (grandtotal == 0) {
+    document.getElementById('submit-button').classList.add("disabled");
+  } else {
+    document.getElementById('submit-button').classList.remove("disabled");
+  }
+}
 
 // First Class Price Calculate
 function getFirstClassSeatPriceFunction(getFirstClassUnitPrice) {
@@ -73,3 +96,30 @@ function getEconomySeatPriceFunction(getEconomyUnitPrice) {
   return economySeatPrice;
 }
 
+const submitBtn = document.getElementById('submit-button');
+submitBtn.addEventListener('click', function confirmOutputFunction() {
+  // First Class Ticket Quantity Update
+  const firstQuantity = document.getElementById('first-class-seat-count').value;
+  const firstClassTicketQuantity = document.getElementById('first-class-ticket-quantity');
+  firstClassTicketQuantity.innerText = firstQuantity;
+
+  // Economy Ticket Quantity Update
+  const economyQuantity = document.getElementById('economy-seat-count').value;
+  const economyTicketQuantity = document.getElementById('economy-ticket-quantity');
+  economyTicketQuantity.innerText = economyQuantity;
+
+  // Subtotal Price Update
+  const subtotalPriceOutput = document.getElementById('subtotal-price-is');
+  const subtotal = subtotalPriceCalculator();
+  subtotalPriceOutput.innerText = subtotal;
+
+  // Total VAT Update
+  const totalVatOutput = document.getElementById('total-vat-is');
+  const tax = taxPriceCalculator();
+  totalVatOutput.innerText = tax;
+
+  // Grandtotal Update
+  const grandtotalOutput = document.getElementById('grandtotal-is');
+  const grandtotal = grandtotalCalculator();
+  grandtotalOutput.innerText = grandtotal;
+});
